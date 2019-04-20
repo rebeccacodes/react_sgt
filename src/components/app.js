@@ -1,14 +1,30 @@
 import React from 'react';
+import 'materialize-css/dist/css/materialize.min.css';
 import '../assets/css/app.scss';
-import logo from '../assets/images/logo.svg';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import Table from './table';
+import AddStudent from './addStudent';
+
 
 const App = () => (
-    <div>
-        <div className="app">
-            <img src={logo} className="logo rotate"/>
-            <h1>Welcome To React</h1>
+    <Router>
+        <div className="container">
+
+
+            <ul>
+                <li>
+                    <Link to="/"></Link>
+                </li>
+                <li>
+                    <Link to="/add-student">Add Student</Link>
+                </li>
+
+            </ul>
+            <Route exact path="/" component={Table} />
+            <Route path="/add-student" component={AddStudent} />
+
         </div>
-    </div>
+    </Router>
 );
 
 export default App;
