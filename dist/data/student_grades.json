@@ -1,0 +1,29 @@
+{
+    "success": true,
+    "studentGrades": [
+        {
+            "name": "joe",
+            "grade": 88,
+            "course": "math",
+            "id": 1
+        },
+        {
+            "name": "tom",
+            "grade": 77,
+            "course": "english",
+            "id": 2
+        },
+        {
+            "name": "sam",
+            "grade": 92,
+            "course": "science",
+            "id": 3
+        },
+        {
+            "name": "julie",
+            "grade": 84,
+            "course": "art",
+            "id": 4
+        }
+    ]
+}
