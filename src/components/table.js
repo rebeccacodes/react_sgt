@@ -1,22 +1,11 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import Student from './student';
 
 class Table extends Component {
-    constructor(props) {
-        super(props);
 
-        this.state = {
-            students: null
-        }
-    }
-
-    componentDidMount() {
-        this.getStudents();
-    }
 
     renderTable() {
-        const { students } = this.state;
+        const { students } = this.props;
 
         if (!students) {
             return <h1 className="center">Loading Students</h1>
@@ -26,7 +15,7 @@ class Table extends Component {
             return <h1 className="center">No Students Found</h1>
         }
 
-        const student = this.state.students.map((student) => {
+        const student = this.props.students.map((student) => {
             return <Student key={student.id} id={student.id} name={student.name} course={student.course} grade={student.grade} />;
         })
 
@@ -49,13 +38,7 @@ class Table extends Component {
         )
     }
 
-    async getStudents() {
-        const resp = await axios.get('/data/student_grades.json');
 
-        this.setState({
-            students: resp.data.studentGrades
-        });
-    }
 
     render() {
 
