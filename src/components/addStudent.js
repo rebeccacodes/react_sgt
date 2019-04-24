@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+//build a form for new students with the following inputs: name, course, grade
+//when submitted console logs new student info
 
 class AddStudent extends Component {
 
