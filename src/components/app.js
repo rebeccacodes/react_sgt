@@ -1,30 +1,65 @@
-import React from 'react';
+import React, { Component } from 'react';
 import 'materialize-css/dist/css/materialize.min.css';
+import 'materialize-css/dist/js/materialize.min';
 import '../assets/css/app.scss';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import axios from 'axios';
+import { Route, Link } from 'react-router-dom';
 import Table from './table';
 import AddStudent from './addStudent';
+import NavLink from './navLink';
 
 
-const App = () => (
-    <Router>
-        <div className="container">
+let tempId = 100;
 
+class App extends Component {
+    constructor(props) {
+        super(props);
 
-            <ul>
-                <li>
-                    <Link to="/"></Link>
-                </li>
-                <li>
-                    <Link to="/add-student">Add Student</Link>
-                </li>
+        this.state = {
+            students: null
+        }
+    }
 
-            </ul>
-            <Route exact path="/" component={Table} />
-            <Route path="/add-student" component={AddStudent} />
+    addStudent = (student) => {
+        student.id = tempId++;
+        student.grade = parseFloat(student.grade);
+        this.setState({
+            students: [...this.state.students, student]
+        });
+    }
 
-        </div>
-    </Router>
-);
+    componentDidMount() {
+        this.getStudents();
+    }
+
+    async getStudents() {
+        const resp = await axios.get('/data/student_grades.json');
+
+        this.setState({
+            students: resp.data.studentGrades
+        });
+    }
+    render() {
+        return (
+
+            <div className="container">
+                <h1 className="center">Student Grade Table</h1>
+                <div>
+                    <NavLink to="/add-student" text="Add Student" color="blue darken-2" />
+
+                </div>
+
+                <Route exact path="/" render={(routingProps) => {
+                    return <Table {...routingProps} students={this.state.students} />
+                }} />
+                <Route path="/add-student" render={(routingProps) => {
+                    return <AddStudent {...routingProps} add={this.addStudent} />
+                }} />
+            </div>
+
+        );
+
+    }
+}
 
 export default App;
