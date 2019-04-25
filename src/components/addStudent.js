@@ -35,10 +35,7 @@ class AddStudent extends Component {
         return (
             <div>
                 <h4 className="center">Add Student</h4>
-                <div>
-                    <NavLink to="/" text="Back" color="blue darken-2" />
 
-                </div>
                 <form onSubmit={this.handleSubmit}>
 
                     <div className="row">
@@ -55,6 +52,10 @@ class AddStudent extends Component {
 
                     <button className="waves-effect waves-light btn">Submit</button>
                     <button className="waves-effect waves-light btn" type="button" onClick={this.resetForm}>Reset</button>
+                    <div>
+                        <NavLink to="/" text="Back" color="blue darken-2" />
+
+                    </div>
                 </form>
 
             </div>
